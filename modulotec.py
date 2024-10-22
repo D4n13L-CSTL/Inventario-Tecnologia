@@ -194,11 +194,14 @@ class anysis:
     ancho_a = 450
     alto_a = 80
     def actualiza(self,master):
-        self.conexion = sqlite3.connect(ruta("DataBase/Database.db"))
-        self.pointer = self.conexion.cursor()
-        self.pointer.execute(f"UPDATE ANYDESK SET NOMBRE = ?, DIRECCION = ?, CLAVE = ? WHERE ID = ?",(self.name.get(), self.dire.get(), self.paso.get(), self.valor[0]))
-        self.conexion.commit()
-        self.conexion.close()
+        try:
+            self.conexion = sqlite3.connect(ruta("DataBase/Database.db"))
+            self.pointer = self.conexion.cursor()
+            self.pointer.execute(f"UPDATE ANYDESK SET NOMBRE = ?, DIRECCION = ?, CLAVE = ? WHERE ID = ?",(self.name.get(), self.dire.get(), self.paso.get(), self.valor[0]))
+            self.conexion.commit()
+            self.conexion.close()
+        except sqlite3.IntegrityError as error_duplicado:
+            messagebox.showerror("ERROR",f"Error de valor duplicado:\n{error_duplicado}")
         self.root_up.destroy()
         messagebox.showinfo("UPDATE","Actualizacion con exito")
         self.root.destroy()
