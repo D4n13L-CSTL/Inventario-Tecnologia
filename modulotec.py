@@ -33,7 +33,7 @@ class auten:
             else:
                 messagebox.showerror("Error",f"El usario {self.user_input.get()} no existe")
         elif name == "sistema":
-            messagebox.showinfo("Sistema","istema")
+            messagebox.showinfo("Sistema","Sistema en construccion")
     def index(self,master,cn):
         self.fuente = ("Arial", 12, "bold")
         self.alto = 400
